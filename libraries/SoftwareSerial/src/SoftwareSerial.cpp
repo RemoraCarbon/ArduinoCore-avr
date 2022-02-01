@@ -182,7 +182,7 @@ void SoftwareSerial::recv()
     }
 
     // skip the stop bit
-    tunedDelay(_rx_delay_stopbit);
+    tunedDelay(_rx_delay_stopbit * 2);
     DebugPulse(_DEBUG_PIN1, 1);
 
     // Re-enable interrupts when we're sure to be inside the stop bit
@@ -462,7 +462,7 @@ size_t SoftwareSerial::write(uint8_t b)
     *reg |= reg_mask;
 
   SREG = oldSREG; // turn interrupts back on
-  tunedDelay(_tx_delay);
+  tunedDelay(_tx_delay * 2);
   
   return 1;
 }
